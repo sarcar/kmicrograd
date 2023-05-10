@@ -49,7 +49,13 @@ class Value:
         other = other if isinstance(other, Value) else Value(other)
         other_inverse = other**-1
         return self * other_inverse
-   
+
+    '''
+    def __eq__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
+        return self.data == other.data
+    '''
+
     def __neg__(self):
         return self * -1
 
@@ -102,8 +108,14 @@ class Value:
     def __radd__(self, other):
         return Value(other) + self
 
+    def __rsub__(self, other):
+        return Value(other) - self
+
     def __rmul__(self, other):
         return Value(other) * self
+
+    def __rtruediv__(self, other):
+        return Value(other) / self
 
     def backward(self): 
         # Topological sort
